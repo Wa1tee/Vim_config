@@ -1,3 +1,4 @@
+set encoding=utf-8
 call plug#begin()
 Plug 'kovisoft/paredit'
 Plug 'eagletmt/ghcmod-vim'
@@ -16,6 +17,7 @@ Plug 'Shougo/vimproc.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug '/plytophogy/vim-virtualenv'
 call plug#end()
 
 set number
@@ -97,11 +99,14 @@ vmap a= :Tabularize /=<CR>
 vmap a; :Tabularize /::<CR>
 vmap a- :Tabularize /-><CR>
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extenisons#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'minimalist'
+let g:airline#extensions#brahcn#enabled = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
-endif
-let g:airline_symbols = "\ua0"
-  let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline_theme = 'molokai'
+ endif
+ let g:airline_symbols.space = "\ua0"
