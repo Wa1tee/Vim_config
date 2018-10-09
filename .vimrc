@@ -17,7 +17,8 @@ Plug 'Shougo/vimproc.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug '/plytophogy/vim-virtualenv'
+Plug 'plytophogy/vim-virtualenv'
+Plug 'suoto/vim-hdl'
 call plug#end()
 
 set number
