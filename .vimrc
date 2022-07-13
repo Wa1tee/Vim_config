@@ -1,50 +1,50 @@
 set encoding=utf-8
 call plug#begin()
 Plug 'kovisoft/paredit'
-Plug 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'plytophogy/vim-virtualenv'
-Plug 'suoto/vim-hdl'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
+Plug 'tmhedberg/SimpylFold'
+Plug 'nvie/vim-flake8'
 call plug#end()
+
 
 set number
 set ruler
-set relativenumber
+" set relativenumber
 " line numbers
 " show existing tab with 4 spaces width
-set tabstop=2
+set tabstop=4
 " when indenting with '>', use 4 spaces width
-set shiftwidth=2
+set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 set scrolloff=10
+set softtabstop=4
+set textwidth=79
+
 "set cursorline
 
 let python_hilight_all = 1
+syntax on
 
 set nocompatible
 set nowrap
 set showmode
-set tw=80
 set smartcase
 set smarttab
 set smartindent
 set autoindent
-set softtabstop=2
 set incsearch
 set mouse=a
 set history=1000
@@ -73,12 +73,6 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-"ghc-mod code completion
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
-
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
 "supertab
@@ -93,21 +87,24 @@ endif
 "nerdtree
 map <Leader>n :NERDTreeToggle<CR>
 
-"tabularize
-let g:haskell_tabular = 1
+" DelimitMate
+let g:delimitMate_expand_cr = 2
 
-vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \}
+set laststatus=2
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extenisons#tabline#formatter = 'default'
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'minimalist'
-let g:airline#extensions#brahcn#enabled = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
- endif
- let g:airline_symbols.space = "\ua0"
+" Toggle NERDTree with ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with spacebar
+nnoremap <space> za
+
+" Ignore unnecessary files in nerdtree
+let NERDTreeIgnore=['\.csv$', '\.png$']
