@@ -1,23 +1,34 @@
 set encoding=utf-8
 call plug#begin()
-Plug 'kovisoft/paredit'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'tomtom/tlib_vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'godlygeek/tabular'
-Plug 'ervandew/supertab'
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimproc.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
-Plug 'tmhedberg/SimpylFold'
-Plug 'nvie/vim-flake8'
+    Plug 'kovisoft/paredit'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'scrooloose/nerdtree'
+    Plug 'preservim/nerdcommenter'
+    Plug 'godlygeek/tabular'
+    Plug 'itchyny/lightline.vim'
+    Plug 'tpope/vim-surround'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'phanviet/vim-monokai-pro'
+    Plug 'nathanaelkane/vim-indent-guides'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Python specific
+    Plug 'tmhedberg/SimpylFold'
+    Plug 'nvie/vim-flake8'
+    " C++ specific
+    Plug 'valloric/youcompleteme'
+    Plug 'majutsushi/tagbar'
+    " CSV
+	Plug 'chrisbra/csv.vim'
+    " Git
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
+colorscheme monokai_pro
+set termguicolors
+
+filetype plugin on
 
 set number
 set ruler
@@ -31,7 +42,6 @@ set shiftwidth=4
 set expandtab
 set scrolloff=10
 set softtabstop=4
-set textwidth=79
 
 "set cursorline
 
@@ -61,34 +71,10 @@ set wildmode=longest,list,full
 set wildmenu
 set completeopt+=longest
 
-"syntastic settings
-map <Leader>s :SyntasticToggleMode<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-
-"supertab
-if has("gui_running")
-  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
-endif
 
 "nerdtree
 map <Leader>n :NERDTreeToggle<CR>
 
-" DelimitMate
-let g:delimitMate_expand_cr = 2
 
 " Lightline
 let g:lightline = {
@@ -107,4 +93,9 @@ set foldlevel=99
 nnoremap <space> za
 
 " Ignore unnecessary files in nerdtree
-let NERDTreeIgnore=['\.csv$', '\.png$']
+let NERDTreeIgnore=['\.png$']
+
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = exepath("clangd")
