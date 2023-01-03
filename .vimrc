@@ -1,3 +1,5 @@
+" Vim configuration by Waitee
+
 set encoding=utf-8
 call plug#begin()
     Plug 'kovisoft/paredit'
@@ -9,31 +11,37 @@ call plug#begin()
     Plug 'tpope/vim-surround'
     Plug 'machakann/vim-highlightedyank'
     Plug 'phanviet/vim-monokai-pro'
-    Plug 'nathanaelkane/vim-indent-guides'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    ""Plug 'nathanaelkane/vim-indent-guides'
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'yggdroot/indentline'
+
     " Python specific
     Plug 'tmhedberg/SimpylFold'
     Plug 'nvie/vim-flake8'
     " C++ specific
-    Plug 'valloric/youcompleteme'
+    "Plug 'valloric/youcompleteme'
     Plug 'majutsushi/tagbar'
     " CSV
-	Plug 'chrisbra/csv.vim'
+    Plug 'chrisbra/csv.vim'
     " Git
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
-
+    Plug 'rbong/vim-flog'
+    "Distraction free stuff
+    Plug 'junegunn/limelight.vim'
+    Plug 'junegunn/goyo.vim'
 call plug#end()
+
 
 colorscheme monokai_pro
 set termguicolors
 
 filetype plugin on
 
+" line numbers
 set number
 set ruler
 " set relativenumber
-" line numbers
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
@@ -94,8 +102,3 @@ nnoremap <space> za
 
 " Ignore unnecessary files in nerdtree
 let NERDTreeIgnore=['\.png$']
-
-" Let clangd fully control code completion
-let g:ycm_clangd_uses_ycmd_caching = 0
-" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-let g:ycm_clangd_binary_path = exepath("clangd")
